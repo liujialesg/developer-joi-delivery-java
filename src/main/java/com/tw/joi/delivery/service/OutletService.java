@@ -2,9 +2,16 @@ package com.tw.joi.delivery.service;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
+import com.tw.joi.delivery.domain.GroceryStore;
 import com.tw.joi.delivery.domain.Outlet;
 import com.tw.joi.delivery.seedData.SeedData;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class OutletService {
 	private final Map<String, Outlet> outlets = SeedData.outlets;
 	
@@ -21,5 +28,11 @@ public class OutletService {
 		
         return outlets.get(outletId);
     }
+	
+	private GroceryStore populateInventory(GroceryStore storeToPopulate)
+	{
+		// TODO
+		return null;
+	}
 	
 }
