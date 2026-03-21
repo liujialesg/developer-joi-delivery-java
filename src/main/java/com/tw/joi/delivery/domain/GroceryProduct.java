@@ -1,6 +1,9 @@
 package com.tw.joi.delivery.domain;
 
 import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +27,7 @@ public class GroceryProduct extends Product {
 
     private BigDecimal discount;
 
+    @JsonBackReference
     private GroceryStore store;
 
     @Builder

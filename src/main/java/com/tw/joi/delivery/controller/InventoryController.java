@@ -20,6 +20,6 @@ public class InventoryController {
 
     @GetMapping("/health")
     public ResponseEntity<Object> fetchStoreInventoryHealth(@RequestParam(name = "storeId") String storeId) {
-        return ResponseEntity.ok(outletService.fetchOutletById(storeId));
+        return ResponseEntity.ok(outletService.fetchOutletWithInventory(storeId));
     }
 }

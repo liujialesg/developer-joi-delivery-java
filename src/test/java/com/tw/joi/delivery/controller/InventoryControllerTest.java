@@ -34,7 +34,7 @@ class InventoryControllerTest {
                 .name("Fresh Picks")
                 .outletId(storeID)
                 .build();
-        when(outletService.fetchOutletById(storeID)).thenReturn(groceryStore);
+        when(outletService.fetchOutletWithInventory(storeID)).thenReturn(groceryStore);
         
         mockMvc.perform(MockMvcRequestBuilders.get(getUrl,storeID)
                             .contentType(MediaType.APPLICATION_JSON))
