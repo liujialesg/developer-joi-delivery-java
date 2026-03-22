@@ -59,6 +59,9 @@ public class OutletServiceTest {
         // Must be of Grocery Store class
         GroceryStore retrievedStore = assertInstanceOf(GroceryStore.class, retrievedOutlet);
         
+        // Must be of correct ID
+        assertEquals(storeID, retrievedStore.getOutletId());
+        
         // Must have correct inventory size
         assertEquals(3, retrievedStore.getInventory().size());
         
@@ -98,15 +101,16 @@ public class OutletServiceTest {
         
         List<GroceryProduct> newProductList =
                 Arrays.asList(product4, product5);
-        when(productRepository.fetchGroceryProductsByOutletId(storeID)).thenReturn(newProductList);
-        
-        
+        when(productRepository.fetchGroceryProductsByOutletId(storeID)).thenReturn(newProductList);        
         
         // Execute the method
         Outlet retrievedOutlet = outletService.fetchOutletWithInventory(storeID);
         
         // Must be of Grocery Store class
         GroceryStore retrievedStore = assertInstanceOf(GroceryStore.class, retrievedOutlet);
+        
+        // Must be of correct ID
+        assertEquals(storeID, retrievedStore.getOutletId());
         
         // Must have correct inventory size
         assertEquals(2, retrievedStore.getInventory().size());
