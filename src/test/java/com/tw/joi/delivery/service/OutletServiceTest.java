@@ -70,6 +70,55 @@ public class OutletServiceTest {
 	}
 	
 	
+	@Test
+    void shouldRefreshToLastestInventoryData() throws Exception {
+		String storeID = "store101";
+		
+        // Mock store
+        GroceryStore groceryStore = GroceryStore.builder()
+                .name("Fresh Picks")
+                .outletId(storeID)
+                .build();
+        
+        
+        // Mock existing products of store
+        GroceryProduct product1 = createGroceryProduct("Wheat Bread", "product101", groceryStore);
+        GroceryProduct product2 = createGroceryProduct("Spinach", "product102", groceryStore);
+        GroceryProduct product3 = createGroceryProduct("Crackers", "product103", groceryStore);
+        groceryStore.getInventory().add(product1);
+        groceryStore.getInventory().add(product2);
+        groceryStore.getInventory().add(product3);
+        
+        // To return mocked store when fetched
+        when(outletRepository.fetchOutletById(storeID)).thenReturn(groceryStore);
+        
+        // Mock new list of products
+        GroceryProduct product4 = createGroceryProduct("Potato Chips", "product104", groceryStore);
+        GroceryProduct product5 = createGroceryProduct("Apples", "product105", groceryStore);
+        
+        List<GroceryProduct> newProductList =
+                Arrays.asList(product4, product5);
+        when(productRepository.fetchGroceryProductsByOutletId(storeID)).thenReturn(newProductList);
+        
+        
+        
+        // Execute the method
+        Outlet retrievedOutlet = outletService.fetchOutletWithInventory(storeID);
+        
+        // Must be of Grocery Store class
+        GroceryStore retrievedStore = assertInstanceOf(GroceryStore.class, retrievedOutlet);
+        
+        // Must have correct inventory size
+        assertEquals(2, retrievedStore.getInventory().size());
+        
+        // Must have mocked products
+        assert(retrievedStore.getInventory().contains(product4));
+        assert(retrievedStore.getInventory().contains(product5));      
+        
+
+	}
+	
+	
 	
 	private static GroceryProduct createGroceryProduct(String productName,
             String productId, GroceryStore store) {
