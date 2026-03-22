@@ -45,9 +45,14 @@ public class OutletService {
 	 */
 	private void populateGroceryStoreInventory(GroceryStore storeToPopulate)
 	{
+		// Clear existing data if any
+		storeToPopulate.getInventory().clear();
+		
+		// Fetch from product repository
 		List<GroceryProduct> storeProducts = productRepository
 				.fetchGroceryProductsByOutletId(storeToPopulate.getOutletId());
 		
+		// Populate store inventory
 		for(GroceryProduct groceryProduct: storeProducts)
 		{
 			storeToPopulate.getInventory().add(groceryProduct);
