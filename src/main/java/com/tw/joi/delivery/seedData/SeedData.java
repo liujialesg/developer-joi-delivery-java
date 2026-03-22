@@ -12,20 +12,19 @@ import java.util.Map;
 import java.util.Random;
 
 public class SeedData {
+	
+	public static GroceryStore store101 = SeedData.createStore("Fresh Picks", "store101");
+    public static GroceryStore store102 = SeedData.createStore("Natural Choice", "store102");
 
     public static Map<String, Cart> cartForUsers = Map.of(
         "user101", createCartForUser("user101", "John", "Doe", "cart101"),
         "user102", createCartForUser("user102", "Rachel", "Zane", "cart102"));
-
-    public static GroceryStore store101 = SeedData.createStore("Fresh Picks", "store101");
-    public static GroceryStore store102 = SeedData.createStore("Natural Choice", "store102");
     
     public static Map<String, Outlet> outlets = Map.of(
-    		store101.getOutletId(), store101,
-    		store102.getOutletId(), store102
+    		store101.getOutletId(), SeedData.createStore(store101.getName(), store101.getOutletId()),
+    		store102.getOutletId(), SeedData.createStore(store102.getName(), store102.getOutletId())
     		);
-    		
-    
+        
     public static User user101= SeedData.createUser("user101", "John", "Doe");
 
     public static List<GroceryProduct> groceryProducts =
