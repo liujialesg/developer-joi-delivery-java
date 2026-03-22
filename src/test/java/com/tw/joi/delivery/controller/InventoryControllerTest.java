@@ -40,6 +40,8 @@ class InventoryControllerTest {
                             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
         //put meaning assertions
-           .andExpect(MockMvcResultMatchers.jsonPath("$.outletId", Is.is(storeID)));
+           .andExpect(MockMvcResultMatchers.jsonPath("$.outletId", Is.is(storeID)))
+           .andExpect(MockMvcResultMatchers.jsonPath("$.name", Is.is("Fresh Picks")))
+           .andExpect(MockMvcResultMatchers.jsonPath("$.inventory").isEmpty());
     }
 }
