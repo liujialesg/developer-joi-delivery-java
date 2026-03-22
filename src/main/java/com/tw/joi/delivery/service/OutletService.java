@@ -29,8 +29,10 @@ public class OutletService {
 	 */
 	public Outlet fetchOutletWithInventory(String outletId)
 	{
+		// Get outlet by ID
 		Outlet outlet = outletRepository.fetchOutletById(outletId);
 		
+		// Populate outlet's inventory base on its type
 		if (outlet instanceof GroceryStore groceryStore)
 		{
 			populateGroceryStoreInventory(groceryStore);
